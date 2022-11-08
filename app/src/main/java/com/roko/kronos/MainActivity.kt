@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.roko.kronos.exceptions.NoNetworkExc
 import com.roko.kronos.ui.component.CentredText
 import com.roko.kronos.ui.component.Clock
 import com.roko.kronos.ui.theme.*
@@ -26,6 +27,8 @@ import kotlinx.coroutines.withContext
 import org.apache.commons.net.ntp.NTPUDPClient
 import org.apache.commons.net.ntp.TimeInfo
 import java.net.InetAddress
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 import java.util.*
 import kotlin.math.absoluteValue
 
@@ -38,6 +41,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         isAutoTime = autoTimeSetting()
         var realTime: Long? by mutableStateOf(null)
+        var isNetworkExc: Boolean by mutableStateOf(false)
 
         setContent {
             val coroutineScope = rememberCoroutineScope()
@@ -49,8 +53,12 @@ class MainActivity : ComponentActivity() {
             } */
             LaunchedEffect(Unit) {
                 coroutineScope.launch {
-                    realTime = getNetworkTime()
-                    println("CP-IM1 - $realTime")
+                    try {
+                        realTime = getNetworkTime()
+                        println("CP-set")
+                    } catch (_: NoNetworkExc) {
+                        isNetworkExc = true
+                    }
                 }
             }
 
@@ -71,9 +79,14 @@ class MainActivity : ComponentActivity() {
                             val deviceTime = System.currentTimeMillis()
                             Row(modifier = Modifier.padding(20.dp)) {
                                 Clock(titleRes = R.string.device_clock, time = deviceTime.toTimeString(context = applicationContext))
-                                Clock(titleRes = R.string.real_clock, time = it?.toTimeString(context = applicationContext) ?: "--:--")
+                                if (!isNetworkExc) Clock(titleRes = R.string.real_clock, time = it?.toTimeString(context = applicationContext) ?: "--:--")
                             }
-                            if (it != null) {
+                            if (isNetworkExc) {
+                                CentredText(
+                                    text = stringResource(id = R.string.time_cannot_be_checked_),
+                                    colour = Orange
+                                )
+                            } else if (it != null) {
                                 val timeDifference = (it - deviceTime) / 1000L
                                 (timeDifference.absoluteValue to timeDifference.toDifferenceString()).let { (absDiffAsSec, diffString) ->
                                     if (absDiffAsSec >= 10L && diffString != null) {
@@ -81,7 +94,7 @@ class MainActivity : ComponentActivity() {
                                             text = stringResource(
                                                 id = R.string.your_device_clock_is_,
                                                 diffString,
-                                                stringResource(id = if (timeDifference >= 10L) R.string.behind else R.string.ahead
+                                                stringResource(id = if (timeDifference >= 0L) R.string.behind else R.string.ahead
                                                 )),
                                             colour = when (absDiffAsSec) {
                                                 in 10L until 30L -> Yellow
@@ -116,20 +129,26 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         isAutoTime = autoTimeSetting()
+        // update clocks
     }
 
     private suspend fun getNetworkTime(): Long? = withContext(Dispatchers.IO) {
-        println("CP-NTC")
+        println("CP-prepare")
         try {
             val timeClient = NTPUDPClient()
-            val inetAddress: InetAddress = InetAddress.getByName("time-a.nist.gov")
+            val inetAddress: InetAddress = InetAddress.getByName("0.pool.ntp.org") // or drastically slower "time-a.nist.gov"
             inetAddress.isReachable(5000)
             val timeInfo: TimeInfo = timeClient.getTime(inetAddress)
             timeClient.close()
             timeInfo.message.receiveTimeStamp.time
         } catch (e: Exception) {
-            println("CP-RG1 - ${e.message}")
-            null
+            when (e) {
+                is UnknownHostException, is SocketTimeoutException -> throw NoNetworkExc()
+                else -> {
+                    println("CP-err - ${e.message}")
+                    null
+                }
+            }
         }
     }
 
@@ -138,7 +157,8 @@ class MainActivity : ComponentActivity() {
         return dateFormat.format(Date(this))
     }
 
-    private fun Long.toDifferenceString(): String? = when (val absAsSec = absoluteValue / 1000L) {
+    /** This number must be expressed in seconds. Can be expressed as negative number, too, returning the same result. */
+    private fun Long.toDifferenceString(): String? = when (val absAsSec = absoluteValue) {
         0L -> null
         in 1L until 60L -> "$absAsSec sec"
         in 60L until 3600L -> {

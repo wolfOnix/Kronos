@@ -15,4 +15,5 @@
     <string name="ahead">ahead</string>
     <string name="your_device_clock_is_synchronised_">Your device clock is in sync with the real clock</string>
     <string name="the_option_could_be_named_differently">The option could be named differently, but it is usually the first one</string>
+    <string name="time_cannot_be_checked_">Without an internet connection it cannot be automatically checked whether the device time is in sync with the real time</string>
 </resources>
