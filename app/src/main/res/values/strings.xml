@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name" translatable="false">Kronos</string>
+    <string name="auto_time_set_is">Automatic time setting is %s</string>
+    <string name="enabled">enabled</string>
+    <string name="disabled">disabled</string>
+    <string name="open_time_settings">Open time settings</string>
+    <string name="hello">Hello!</string>
+    <string name="disable_and_re_enable">Disable and re-enable immediately after</string>
+    <string name="enable">After that, enable</string>
+    <string name="to_synchronise_the_clock_">If you want to synchronise the clock, open the settings by pressing the button below. %s the option \"Set time automatically\"</string>
+    <string name="real_clock">Real clock</string>
+    <string name="device_clock" >Device clock</string>
+    <string name="your_device_clock_is_">Your device clock is %s %s the real clock</string>
+    <string name="behind">behind</string>
+    <string name="ahead">ahead</string>
+    <string name="your_device_clock_is_synchronised_">Your device clock is in sync with the real clock</string>
+    <string name="the_option_could_be_named_differently">The option could be named differently, but it is usually the first one</string>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hallo!</string>
+    <string name="enabled">aktiviert</string>
+    <string name="disabled">deaktiviert</string>
+    <string name="open_time_settings">Zeiteinstellungen öffnen</string>
+    <string name="auto_time_set_is">Automatische Uhrzeitstellung ist %s</string>
+    <string name="to_synchronise_the_clock_">Um die Geräteuhr zu synchronisieren, öffnen Sie die Einstellungen, indem Sie auf die Schaltfläche unten klicken. %s Sie gleich danach die Option „Uhrzeit automatisch einstellen“/ „Zeit aus Netzwerk verwenden”</string>
+    <string name="enable">Aktivieren</string>
+    <string name="disable_and_re_enable">Deaktivieren und aktivieren</string>
+    <string name="real_clock">Netzwerkzeit</string>
+    <string name="device_clock">Gerätezeit</string>
+    <string name="your_device_clock_is_">Die Gerätezeit liegt %s %s der Netzwerkzeit</string>
+    <string name="behind">hinter</string>
+    <string name="ahead">vor</string>
+    <string name="your_device_clock_is_synchronised_">Die Gerätezeit ist mit der Netzwerkzeit synchronisiert</string>
+    <string name="the_option_could_be_named_differently">Der Name der Option kann abweichen, steht aber normalerweise an erster Stelle</string>
+</resources>

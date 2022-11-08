@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Sărut-mâna!</string>
+    <string name="enabled">activată</string>
+    <string name="disabled">dezactivată</string>
+    <string name="open_time_settings">Setări oră</string>
+    <string name="auto_time_set_is">Setarea automată a orei este %s</string>
+    <string name="real_clock">Ora reală</string>
+    <string name="device_clock">Ora dispozitivului</string>
+    <string name="your_device_clock_is_">Ora dispozitivului este cu %s %s orei reale</string>
+    <string name="behind">în urma</string>
+    <string name="ahead">înaintea</string>
+    <string name="your_device_clock_is_synchronised_">Ora dispozitivului este sincronizată cu ora reală</string>
+    <string name="to_synchronise_the_clock_">Pentru a sincroniza ora dispozitivului, accesați setările apăsând butonul de mai jos. Mai apoi, %s opțiunea „Setați ora automat”/ „Alegerea orei din rețea”</string>
+    <string name="enable">activați</string>
+    <string name="disable_and_re_enable">dezactivați și reactivați imediat ulterior</string>
+    <string name="the_option_could_be_named_differently">Numele opțiunii poate diferi, dar se află de regulă pe prima pozție</string>
+</resources>
