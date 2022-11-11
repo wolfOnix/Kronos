@@ -65,7 +65,8 @@ class MainActivity : ComponentActivity() {
             KronosTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     Column(
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier
+                            .fillMaxSize()
                             .padding(15.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
@@ -73,7 +74,7 @@ class MainActivity : ComponentActivity() {
                         CentredText(text = stringResource(id = R.string.hello))
                         CentredText(
                             text = stringResource(id = R.string.auto_time_set_is, stringResource(id = if (isAutoTime) R.string.enabled else R.string.disabled)),
-                            colour = if (isAutoTime) MaterialTheme.colorScheme.onBackground else Red
+                            colour = if (isAutoTime) Colour.FORE.auto() else Colour.RED.auto()
                         )
                         realTime.let {
                             val deviceTime = System.currentTimeMillis()
@@ -84,7 +85,7 @@ class MainActivity : ComponentActivity() {
                             if (isNetworkExc) {
                                 CentredText(
                                     text = stringResource(id = R.string.time_cannot_be_checked_),
-                                    colour = Orange
+                                    colour = Colour.ORANGE.auto()
                                 )
                             } else if (it != null) {
                                 val timeDifference = (it - deviceTime) / 1000L
@@ -97,16 +98,15 @@ class MainActivity : ComponentActivity() {
                                                 stringResource(id = if (timeDifference >= 0L) R.string.behind else R.string.ahead
                                                 )),
                                             colour = when (absDiffAsSec) {
-                                                in 10L until 30L -> Yellow
-                                                in 30L until 60L -> Orange
-                                                in 60L until 1200L -> DarkOrange
-                                                else -> Red
+                                                in 10L until 30L -> Colour.YELLOW.auto()
+                                                in 30L until 1200 -> Colour.ORANGE.auto()
+                                                else -> Colour.RED.auto()
                                             }
                                         )
                                     } else {
                                         CentredText(
                                             text = stringResource(id = R.string.your_device_clock_is_synchronised_),
-                                            colour = Green
+                                            colour = Colour.GREEN.auto()
                                         )
                                     }
                                 }
@@ -115,7 +115,7 @@ class MainActivity : ComponentActivity() {
                         }
                         CentredText(text = stringResource(id = R.string.to_synchronise_the_clock_,
                             stringResource(id = if (isAutoTime) R.string.disable_and_re_enable else R.string.enable)))
-                        CentredText(text = "* ${stringResource(id = R.string.the_option_could_be_named_differently)}", colour = Gray, fontSizeInt = 13)
+                        CentredText(text = "* ${stringResource(id = R.string.the_option_could_be_named_differently)}", colour = Colour.GRAY.auto(), fontSizeInt = 13)
                         Spacer(modifier = Modifier.height(20.dp))
                         Button(onClick = { startActivity(Intent(Settings.ACTION_DATE_SETTINGS)) }) {
                             Text(text = stringResource(id = R.string.open_time_settings))
