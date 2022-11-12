@@ -2,8 +2,6 @@ package com.roko.kronos.ui.view
 
 import android.content.Context
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -13,9 +11,10 @@ import androidx.navigation.NavController
 import com.roko.kronos.R
 import com.roko.kronos.ui.component.CentredText
 import com.roko.kronos.ui.component.Clock
+import com.roko.kronos.ui.component.TextButton
 import com.roko.kronos.ui.theme.Colour
 import com.roko.kronos.ui.theme.auto
-import com.roko.kronos.ui.theme.likeForeground
+import com.roko.kronos.ui.theme.likeOnBackground
 import com.roko.kronos.util.State.isAutoTimeEnabled
 import com.roko.kronos.util.State.isNetworkConnection
 import com.roko.kronos.util.TimeProcessor.deviceTimeMillis
@@ -39,7 +38,7 @@ import kotlin.math.absoluteValue
         CentredText(text = stringResource(id = R.string.hello))
         CentredText(
             text = stringResource(id = R.string.auto_time_set_is, stringResource(id = if (isAutoTimeEnabled) R.string.enabled else R.string.disabled)),
-            colour = if (isAutoTimeEnabled) likeForeground() else Colour.RED.auto()
+            colour = if (isAutoTimeEnabled) likeOnBackground() else Colour.RED.auto()
         )
         networkTimeMillis.let {
             // updateTime()
@@ -79,14 +78,14 @@ import kotlin.math.absoluteValue
                 Spacer(modifier = Modifier.height(20.dp))
             }
         }
-        CentredText(text = stringResource(id = R.string.to_synchronise_the_clock_,
-            stringResource(id = if (isAutoTimeEnabled) R.string.disable_and_re_enable else R.string.enable)
-        )
+        CentredText(
+            text = stringResource(id = R.string.to_synchronise_the_clock_, stringResource(id = if (isAutoTimeEnabled) R.string.disable_and_re_enable else R.string.enable))
         )
         CentredText(text = "* ${stringResource(id = R.string.the_option_could_be_named_differently)}", colour = Colour.GRAY.auto(), fontSizeInt = 13)
         Spacer(modifier = Modifier.height(20.dp))
-        Button(onClick = toClockSettingsAction) {
-            Text(text = stringResource(id = R.string.open_time_settings))
-        }
+        TextButton(
+            stringRes = R.string.open_time_settings,
+            onClick = toClockSettingsAction
+        )
     }
 }

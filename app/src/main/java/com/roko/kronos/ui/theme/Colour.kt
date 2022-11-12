@@ -12,19 +12,21 @@ private val Raisin = Color(0xFF191A55)
 enum class Colour(val light: Color, val dark: Color) {
     // Background and foreground/ text
     BACK(Lavender, Raisin),
-    FORE(Color(0xFFFFFFFF), Color(0xFFADADAD)),
+    FORE(Color(0xFFFFFFFF), Color(0xFFFFFFFF)),
 
     // Interface colours
-    YELLOW(Color(0xFFFFD54F), Color(0xFFFF99AD)),
-    ORANGE(Color(0xFFFFB74D), Color(0xFFFCDE9C)),
-    RED(Color(0xFFFF8A65), Color(0xFFADADAD)),
-    GREEN(Color(0xFF4DB6AC), Color(0xFFADADAD)),
+    YELLOW(Color(0xFFFFD54F), Color(0xFFFFD54F)),
+    ORANGE(Color(0xFFFFB74D), Color(0xFFFFB74D)),
+    RED(Color(0xFFFF8A65), Color(0xFFFF8A65)),
+    GREEN(Color(0xFF4DB6AC), Color(0xFF4DB6AC)),
     GRAY(Color(0xFF909090), Color(0xFFADADAD)),
 }
 
 /** @return The version of this colour that corresponds to the current light/ dark state of the device. */
 @Composable fun Colour.auto(): Color = if (isSystemInDarkTheme()) this.dark else this.light
 
-@Composable fun likeBackground() = MaterialTheme.colorScheme.background
+@Composable fun likePrimary() = MaterialTheme.colorScheme.primary
+@Composable fun likeOnPrimary() = MaterialTheme.colorScheme.onPrimary
 
-@Composable fun likeForeground() = MaterialTheme.colorScheme.onBackground
+@Composable fun likeBackground() = MaterialTheme.colorScheme.background
+@Composable fun likeOnBackground() = MaterialTheme.colorScheme.onBackground
