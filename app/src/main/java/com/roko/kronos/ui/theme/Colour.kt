@@ -1,6 +1,7 @@
 package com.roko.kronos.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
@@ -23,3 +24,7 @@ enum class Colour(val light: Color, val dark: Color) {
 
 /** @return The version of this colour that corresponds to the current light/ dark state of the device. */
 @Composable fun Colour.auto(): Color = if (isSystemInDarkTheme()) this.dark else this.light
+
+@Composable fun likeBackground() = MaterialTheme.colorScheme.background
+
+@Composable fun likeForeground() = MaterialTheme.colorScheme.onBackground
