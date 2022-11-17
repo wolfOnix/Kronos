@@ -16,4 +16,7 @@
     <string name="disable_and_re_enable">dezactivați și reactivați imediat ulterior</string>
     <string name="the_option_could_be_named_differently">Numele opțiunii poate diferi, dar se află de regulă pe prima pozție</string>
     <string name="time_cannot_be_checked_">Fără o conexiune la internet, nu se poate verifica în mod automat dacă ora dispozitivului este sincronizată cu ora reală</string>
+    <string name="settings">Setări</string>
+    <string name="out_of_sync_alerts">Alerte de desincronizare</string>
+    <string name="out_of_sync_alerts_description_">Primiți notificări conform setărilor aplicației atunci când ora dispozitivului este desincronizată.</string>
 </resources>

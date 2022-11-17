@@ -9,6 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.roko.kronos.R
+import com.roko.kronos.Routes
 import com.roko.kronos.ui.component.CentredText
 import com.roko.kronos.ui.component.Clock
 import com.roko.kronos.ui.component.TextButton
@@ -86,6 +87,10 @@ import kotlin.math.absoluteValue
         TextButton(
             stringRes = R.string.open_time_settings,
             onClick = toClockSettingsAction
+        )
+        TextButton(
+            stringRes = R.string.settings,
+            onClick = { navController.navigate(Routes.SETTINGS.name) }
         )
     }
 }
