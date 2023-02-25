@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.roko.kronos.R
 import com.roko.kronos.ui.component.TextButton
-import com.roko.kronos.util.notification.NotificationProcessor.postNotification
+import com.roko.kronos.processors.notification.NotificationProcessor.postNotification
 
 @Composable fun SettingsView(navController: NavController) {
     Column {

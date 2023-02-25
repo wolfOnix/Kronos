@@ -7,7 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.roko.kronos.exceptions.NoNetworkExc
 import com.roko.kronos.util.State
-import com.roko.kronos.util.TimeProcessor
+import com.roko.kronos.processors.TimeProcessor
 
 class MainActivity : ComponentActivity() {
 

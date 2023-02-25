@@ -1,4 +1,4 @@
-package com.roko.kronos.util
+package com.roko.kronos.processors
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
