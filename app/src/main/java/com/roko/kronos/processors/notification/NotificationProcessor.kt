@@ -43,13 +43,8 @@ object NotificationProcessor {
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .build()
-        if (ActivityCompat.checkSelfPermission(
-                applicationContext(),
-                Manifest.permission.POST_NOTIFICATIONS
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            NotificationManagerCompat.from(applicationContext())
-                .notify(NOTIFICATION_GENERAL_ID, notification)
+        if (ActivityCompat.checkSelfPermission(applicationContext(), Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            NotificationManagerCompat.from(applicationContext()).notify(NOTIFICATION_GENERAL_ID, notification)
         } else {
             Toast.makeText(applicationContext(), "Hey, you must allow notifications for this app!", Toast.LENGTH_SHORT).show()
         }
