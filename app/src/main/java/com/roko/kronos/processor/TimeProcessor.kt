@@ -1,9 +1,9 @@
-package com.roko.kronos.processors
+package com.roko.kronos.processor
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.roko.kronos.exceptions.NoNetworkExc
+import com.roko.kronos.exception.NoNetworkExc
 import com.roko.kronos.util.Logger.log
 import com.roko.kronos.util.Logger.logError
 import kotlinx.coroutines.*

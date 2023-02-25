@@ -18,8 +18,8 @@ import com.roko.kronos.ui.theme.auto
 import com.roko.kronos.ui.theme.likeOnBackground
 import com.roko.kronos.util.State.isAutoTimeEnabled
 import com.roko.kronos.util.State.isNetworkConnection
-import com.roko.kronos.processors.TimeProcessor.deviceTimeMillis
-import com.roko.kronos.processors.TimeProcessor.networkTimeMillis
+import com.roko.kronos.processor.TimeProcessor.deviceTimeMillis
+import com.roko.kronos.processor.TimeProcessor.networkTimeMillis
 import com.roko.kronos.util.toDifferenceString
 import com.roko.kronos.util.toTimeString
 import kotlin.math.absoluteValue

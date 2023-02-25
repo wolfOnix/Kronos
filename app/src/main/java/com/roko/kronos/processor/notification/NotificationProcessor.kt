@@ -1,4 +1,4 @@
-package com.roko.kronos.processors.notification
+package com.roko.kronos.processor.notification
 
 import android.Manifest
 import android.app.NotificationChannel
