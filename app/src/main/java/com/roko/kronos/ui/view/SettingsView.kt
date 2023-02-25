@@ -9,8 +9,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.roko.kronos.R
+import com.roko.kronos.model.NotificationData
+import com.roko.kronos.model.RepeatInterval
+import com.roko.kronos.processor.background.WorkManagerHandler
 import com.roko.kronos.ui.component.TextButton
 import com.roko.kronos.processor.notification.NotificationProcessor.postNotification
+import com.roko.kronos.util.Logger.log
 
 @Composable fun SettingsView(navController: NavController) {
     Column {
@@ -20,13 +24,33 @@ import com.roko.kronos.processor.notification.NotificationProcessor.postNotifica
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(modifier = Modifier.weight(0.8f), text = "Receive an alert when the device clock is out of sync")
-            Switch(modifier = Modifier.weight(0.2f), checked = notificationsEnabled, onCheckedChange = { notificationsEnabled = !notificationsEnabled })
+            Switch(
+                modifier = Modifier.weight(0.2f),
+                checked = notificationsEnabled,
+                onCheckedChange = { toChecked ->
+                    notificationsEnabled = !notificationsEnabled
+                    if (toChecked) {
+                        log("CP-TO_CHECKED")
+                        WorkManagerHandler.setWorkManager(repeatInterval = RepeatInterval.FIFTEEN_MINUTES) // todo - let the user choose the interval
+                    } else {
+                        log("CP-TO_UNCHECKED")
+                        WorkManagerHandler.cancelWorkManager()
+                    }
+                }
+            )
         }
 
         if (notificationsEnabled) {
             TextButton(
                 stringRes = R.string.out_of_sync_alerts,
-                onClick = { postNotification() }
+                onClick = {
+                    postNotification(
+                        NotificationData(
+                            title = "Device clock out of sync",
+                            content = "The device clock is 3 years and 4 seconds behind the network clock. Tap the notification to solve the abominable issue!"
+                        )
+                    )
+                }
             )
         }
     }

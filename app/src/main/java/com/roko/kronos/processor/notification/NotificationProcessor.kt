@@ -14,6 +14,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.roko.kronos.MainActivity
 import com.roko.kronos.MainApplication.Companion.applicationContext
 import com.roko.kronos.R
+import com.roko.kronos.model.NotificationData
 
 object NotificationProcessor {
 
@@ -32,13 +33,13 @@ object NotificationProcessor {
         }
     }
 
-    fun postNotification() {
+    fun postNotification(notificationData: NotificationData) {
         val intent = Intent(applicationContext(), MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(applicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE)
         val notification = NotificationCompat.Builder(applicationContext(), NOTIFICATION_CHANNEL_ID)
             .setSmallIcon(R.drawable.notification_logo)
-            .setContentTitle("Device clock out of sync")
-            .setContentText("The device clock is 3 years and 4 seconds behind the network clock. Tap the notification to solve the abominable issue!")
+            .setContentTitle(notificationData.title)
+            .setContentText(notificationData.content)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)

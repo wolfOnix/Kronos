@@ -22,6 +22,8 @@ class MainActivity : ComponentActivity() {
             State.raiseNoNetworkConnection()
         }
 
+        // ?? if (global.NOTIFICATIONS_ON && workManagerNotAlreadySet /* when app is first used and the user granted notification permissions */) WorkManagerHandler.setWorkManager(repeatInterval = global.CHOSEN_REPEAT_INTERVAL)
+
         setContent {
             KronosApp(
                 context = applicationContext,
