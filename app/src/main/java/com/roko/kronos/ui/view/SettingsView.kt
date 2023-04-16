@@ -47,6 +47,7 @@ import com.roko.kronos.util.Logger.log
                     postNotification(
                         NotificationData(
                             title = "Device clock out of sync",
+                            preview = "The device clock is 3 years and 4 seconds behind the network clock. Tap the notification to solve the abominable issue!",
                             content = "The device clock is 3 years and 4 seconds behind the network clock. Tap the notification to solve the abominable issue!"
                         )
                     )
