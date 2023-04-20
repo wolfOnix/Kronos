@@ -20,3 +20,12 @@ object State {
     }
 
 }
+
+enum class ClockState {
+    /** The network time has not yet been discovered but has been requested. */
+    PENDING,
+    /** There is no internet connection and the network time could not be requested. */
+    NO_INTERNET,
+    /** The network time has been requested and is known. */
+    KNOWN,
+}

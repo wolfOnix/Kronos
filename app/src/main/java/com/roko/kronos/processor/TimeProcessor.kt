@@ -21,32 +21,16 @@ object TimeProcessor {
         private set
     private var deltaMillis: Long? = null
 
-    fun setNetworkTime() = runBlocking {
+    /*fun setNetworkTime() = runBlocking { // todo - remove runBlocking as it blocks the thread; removing this seems to make "Davey" warning no longer appear (Hurray!)
         launch {
-            withContext(Dispatchers.IO) {
-                log("SET-NET-TIME")
-                try {
-                    val inetAddress = InetAddress.getByName("0.pool.ntp.org").apply {
-                        isReachable(5000)
-                    }
-                    val timeClient = NTPUDPClient()
-                    val timeInfo: TimeInfo = timeClient.getTime(inetAddress)
-                    timeClient.close()
-                    timeInfo.message.receiveTimeStamp.time.let {
-                        networkTimeMillis = it
-                        val currentMillis = System.currentTimeMillis()
-                        deviceTimeMillis = currentMillis
-                        deltaMillis = it - currentMillis
-                    }
-                } catch (e: Exception) {
-                    logError(e)
-                    when (e) {
-                        is UnknownHostException, is SocketTimeoutException -> throw NoNetworkExc()
-                    }
-                }
+            getNetworkTime()?.let {
+                networkTimeMillis = it
+                val currentMillis = System.currentTimeMillis()
+                deviceTimeMillis = currentMillis
+                deltaMillis = it - currentMillis
             }
         }
-    }
+    }*/
 
     fun updateTime() {
         log("UPD-TIME")
@@ -54,6 +38,25 @@ object TimeProcessor {
         deviceTimeMillis = currentMillis
         if (networkTimeMillis != null) deltaMillis?.let { delta ->
             networkTimeMillis = currentMillis + delta
+        }
+    }
+
+    suspend fun getNetworkTime(): Long? = withContext(Dispatchers.IO) {
+        log("GET-NET-TIME")
+        return@withContext try {
+            val inetAddress = InetAddress.getByName("0.pool.ntp.org").apply {
+                isReachable(5000)
+            }
+            val timeClient = NTPUDPClient()
+            val timeInfo: TimeInfo = timeClient.getTime(inetAddress)
+            timeClient.close()
+            timeInfo.message.receiveTimeStamp.time.also { log("Received NETZ timestamp $it") }
+        } catch (e: Exception) {
+            logError(e)
+            when (e) {
+                is UnknownHostException, is SocketTimeoutException -> throw NoNetworkExc()
+                else -> null
+            }
         }
     }
 
