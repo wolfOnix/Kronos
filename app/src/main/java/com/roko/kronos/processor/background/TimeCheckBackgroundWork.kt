@@ -9,7 +9,7 @@ import com.roko.kronos.processor.notification.NotificationProcessor
 class TimeCheckBackgroundWork(context: Context, workerParameters: WorkerParameters) : Worker(context, workerParameters) {
 
     override fun doWork(): Result {
-        NotificationProcessor.postNotification(NotificationData(title = "Out of sync", preview = "Automatic notification", content = "This is an automatic notification. Your device is well behind the real clock - 4 years, 34 minutes and 53 milliseconds"))
+        NotificationProcessor.postNotification(NotificationData(title = "Automatic notification", preview = "Some time has passed...", content = "Some time has passed since you have last verified if your clock is in time - pun intended. Open the app and verify if everything is all right!"))
         return Result.success()
     }
 

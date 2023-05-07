@@ -44,12 +44,12 @@ import com.roko.kronos.processor.notification.NotificationProcessor.postNotifica
 
         if (notificationsEnabled) {
             TextButton(
-                stringRes = R.string.out_of_sync_alerts,
+                stringRes = R.string.test_notification,
                 onClick = {
                     postNotification(
                         NotificationData(
-                            title = "Device clock out of sync",
-                            preview = "The device clock is 3 years and 4 seconds behind the network clock. Tap the notification to solve the abominable issue!",
+                            title = "Test notification",
+                            preview = "Device clock out of sync...",
                             content = "The device clock is 3 years and 4 seconds behind the network clock. Tap the notification to solve the abominable issue!"
                         )
                     )

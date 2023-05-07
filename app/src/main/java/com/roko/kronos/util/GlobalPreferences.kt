@@ -9,7 +9,7 @@ import java.lang.ClassCastException
 
 class GlobalPreferences(context: Context) {
 
-    private val preferences = context.getSharedPreferences("kronos_globals", Context.MODE_PRIVATE)
+    private val preferences = context.getSharedPreferences("kronos_globals", Context.MODE_PRIVATE) ?: error("Getting shared preferences from context failed")
 
     private enum class PreferenceKeys {
         NOTIFICATIONS_ENABLED

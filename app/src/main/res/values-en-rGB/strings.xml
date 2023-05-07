@@ -17,6 +17,7 @@
     <string name="the_option_could_be_named_differently">The option could be named differently, but it is usually the first one</string>
     <string name="time_cannot_be_checked_">Without an internet connection it cannot be automatically checked whether the device time is in sync with the real time</string>
     <string name="settings">Settings</string>
+    <string name="test_notification">Test notification</string>
     <string name="out_of_sync_alerts">Out of sync alerts</string>
     <string name="out_of_sync_alerts_description_">Receive notifications as set in the application settings when the device clock is out of sync.</string>
 </resources>
