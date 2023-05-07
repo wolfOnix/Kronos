@@ -9,16 +9,18 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.roko.kronos.R
+import com.roko.kronos.constants.DEFAULT_NOTIFICATIONS_ENABLED
 import com.roko.kronos.model.NotificationData
 import com.roko.kronos.model.RepeatInterval
 import com.roko.kronos.processor.background.WorkManagerHandler
 import com.roko.kronos.ui.component.TextButton
 import com.roko.kronos.processor.notification.NotificationProcessor.postNotification
-import com.roko.kronos.util.Logger.log
+
+// todo - ensure that the Work does not remain active when notificationsEnabled is false (and false is the desired value)
 
 @Composable fun SettingsView(navController: NavController) {
     Column {
-        var notificationsEnabled by remember { mutableStateOf(false) } // todo - if notifications are enabled, check and request permission (SDK 33+)
+        var notificationsEnabled by remember { mutableStateOf(DEFAULT_NOTIFICATIONS_ENABLED) } // todo - if notifications are enabled, check and request permission (SDK 33+)
 
         Row(
             modifier = Modifier.fillMaxWidth()
@@ -30,10 +32,8 @@ import com.roko.kronos.util.Logger.log
                 onCheckedChange = { toChecked ->
                     notificationsEnabled = !notificationsEnabled
                     if (toChecked) {
-                        log("CP-TO_CHECKED")
                         WorkManagerHandler.setWorkManager(repeatInterval = RepeatInterval.FIFTEEN_MINUTES) // todo - let the user choose the interval
                     } else {
-                        log("CP-TO_UNCHECKED")
                         WorkManagerHandler.cancelWorkManager()
                     }
                 }
