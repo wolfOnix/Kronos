@@ -6,8 +6,8 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.roko.kronos.ui.theme.likeOnPrimary
-import com.roko.kronos.ui.theme.likePrimary
+import com.roko.kronos.ui.theme.likeBackground
+import com.roko.kronos.ui.theme.likeOnBackground
 
 @Composable fun TextButton(
     @StringRes stringRes: Int,
@@ -16,8 +16,8 @@ import com.roko.kronos.ui.theme.likePrimary
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            contentColor = likeOnPrimary(),
-            containerColor = likePrimary(),
+            contentColor = likeBackground(),
+            containerColor = likeOnBackground(),
         )
     ) {
         Text(text = stringResource(id = stringRes))

@@ -5,9 +5,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-private val Mint = Color(0xFF51E5FD)
-private val Lavender = Color(0xFF5177FD)
-private val Raisin = Color(0xFF191A55)
+val Mint = Color(0xFF51E5FD)
+val Lavender = Color(0xFF5177FD)
+val Raisin = Color(0xFF191A55)
 
 enum class Colour(val light: Color, val dark: Color) {
     // Background and foreground/ text
@@ -25,8 +25,8 @@ enum class Colour(val light: Color, val dark: Color) {
 /** @return The version of this colour that corresponds to the current light/ dark state of the device. */
 @Composable fun Colour.auto(): Color = if (isSystemInDarkTheme()) this.dark else this.light
 
-@Composable fun likePrimary() = MaterialTheme.colorScheme.primary
-@Composable fun likeOnPrimary() = MaterialTheme.colorScheme.onPrimary
+// @Composable fun likePrimary() = MaterialTheme.colorScheme.primary
+// @Composable fun likeOnPrimary() = MaterialTheme.colorScheme.onPrimary
 
 @Composable fun likeBackground() = MaterialTheme.colorScheme.background
 @Composable fun likeOnBackground() = MaterialTheme.colorScheme.onBackground
