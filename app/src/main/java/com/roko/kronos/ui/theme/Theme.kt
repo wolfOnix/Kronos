@@ -46,7 +46,7 @@ private val DarkColorScheme = darkColorScheme(
     SideEffect {
         systemUiController.setSystemBarsColor(
             color = colorScheme.background,
-            darkIcons = false
+            darkIcons = !darkTheme
         )
     }
 

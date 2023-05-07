@@ -11,8 +11,8 @@ private val Raisin = Color(0xFF191A55)
 
 enum class Colour(val light: Color, val dark: Color) {
     // Background and foreground/ text
-    BACK(Lavender, Raisin),
-    FORE(Color(0xFFFFFFFF), Color(0xFFFFFFFF)),
+    BACK(Color(0xFFFFFFFF), Raisin),
+    FORE(Raisin, Color(0xFFFFFFFF)),
 
     // Interface colours
     YELLOW(Color(0xFFFFD54F), Color(0xFFFFD54F)),
