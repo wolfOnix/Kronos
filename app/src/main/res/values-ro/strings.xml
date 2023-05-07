@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Sărut-mâna!</string>
-    <string name="enabled">activată</string>
-    <string name="disabled">dezactivată</string>
+    <string name="enabled">activă</string>
+    <string name="disabled">inactivă</string>
     <string name="open_time_settings">Setări oră</string>
     <string name="auto_time_set_is">Setarea automată a orei este %s</string>
     <string name="real_clock">Ora reală</string>

@@ -10,7 +10,7 @@ import kotlin.math.absoluteValue
 import kotlin.math.pow
 import kotlin.math.roundToLong
 
-private val timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss.S")
+private val timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss") // precisionDrop = 2 -> "HH:mm:ss.S", precisionDrop = 3 -> "HH:mm:ss"
 private val zoneId = ZoneId.systemDefault()
 
 // todo - find better solution for localised pattern that includes seconds and uses one-time initialised formatter (unlike initialising it on every function call)
@@ -31,6 +31,7 @@ fun Long.asTimeString(context: Context): String {
 /*
     todo - see https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.time/-duration/ - toComponents()
         duration.toComponents { minutes, seconds, _ -> String.format("%02d:%02d", minutes, seconds) } - days and hours can be used too
+    todo - if precisionDrop = 2 -> show seconds with one decimal
 */
 fun Long.asDifferenceString(): String? = when (val absAsSec = absoluteValue) {
     0L -> null

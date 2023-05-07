@@ -69,6 +69,7 @@ import kotlin.math.absoluteValue
                             colour = Colour.GREEN.auto()
                         )
                     }
+                    Spacer(modifier = Modifier.height(20.dp))
                 }
             }
         }

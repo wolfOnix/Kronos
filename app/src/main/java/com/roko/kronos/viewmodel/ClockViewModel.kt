@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.roko.kronos.constants.DEFAULT_PRECISION_DROP
 import com.roko.kronos.exception.NoNetworkExc
 import com.roko.kronos.processor.TimeProcessor
 import com.roko.kronos.util.ClockState
@@ -50,7 +51,7 @@ class ClockViewModel(context: Context) : ViewModel() {
      * orders from the number) can be dropped as they are irrelevant/ not displayed: the precision drop is 3 in this case and the number `12000L`
      * can be used instead.
      */
-    private val precisionDrop = 2 // preserve from the tenth of a second above
+    private val precisionDrop = DEFAULT_PRECISION_DROP
     /**
      * The refresh interval (ms) **must** be a divisor of `10 ^` [precisionDrop] so that both the device time and the network time as digital time
      * Strings would tick on the same time.
