@@ -9,7 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.roko.kronos.R
-import com.roko.kronos.constants.DEFAULT_NOTIFICATIONS_ENABLED
+import com.roko.kronos.globalPrefs
 import com.roko.kronos.model.NotificationData
 import com.roko.kronos.model.RepeatInterval
 import com.roko.kronos.processor.background.WorkManagerHandler
@@ -20,7 +20,7 @@ import com.roko.kronos.processor.notification.NotificationProcessor.postNotifica
 
 @Composable fun SettingsView(navController: NavController) {
     Column {
-        var notificationsEnabled by remember { mutableStateOf(DEFAULT_NOTIFICATIONS_ENABLED) } // todo - if notifications are enabled, check and request permission (SDK 33+)
+        var notificationsEnabled by remember { mutableStateOf(globalPrefs.SETTING_NOTIFICATIONS_ENABLED) } // todo - if notifications are enabled, check and request permission (SDK 33+)
 
         Row(
             modifier = Modifier.fillMaxWidth()
@@ -31,10 +31,12 @@ import com.roko.kronos.processor.notification.NotificationProcessor.postNotifica
                 checked = notificationsEnabled,
                 onCheckedChange = { toChecked ->
                     notificationsEnabled = !notificationsEnabled
+                    globalPrefs.SETTING_NOTIFICATIONS_ENABLED = notificationsEnabled
                     if (toChecked) {
                         WorkManagerHandler.setWorkManager(repeatInterval = RepeatInterval.FIFTEEN_MINUTES) // todo - let the user choose the interval
                     } else {
                         WorkManagerHandler.cancelWorkManager()
+                        // todo - clear any existing notification
                     }
                 }
             )
