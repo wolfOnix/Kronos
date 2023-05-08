@@ -23,4 +23,6 @@ class GlobalPreferences(context: Context) {
         }
         set(value) = preferences.edit().putBoolean(NOTIFICATIONS_ENABLED.name, value).apply()
 
+    // var PREFERRED_PRECISION_DROP
+
 }

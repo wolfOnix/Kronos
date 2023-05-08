@@ -25,6 +25,9 @@ enum class Colour(val light: Color, val dark: Color) {
 /** @return The version of this colour that corresponds to the current light/ dark state of the device. */
 @Composable fun Colour.auto(): Color = if (isSystemInDarkTheme()) this.dark else this.light
 
+/** @return This colour (Color) if system is in light mode or the other one if in dark mode. */
+@Composable infix fun Color.or(other: Color): Color = if (isSystemInDarkTheme()) other else this
+
 // @Composable fun likePrimary() = MaterialTheme.colorScheme.primary
 // @Composable fun likeOnPrimary() = MaterialTheme.colorScheme.onPrimary
 
